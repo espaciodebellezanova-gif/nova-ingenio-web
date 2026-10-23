@@ -85,38 +85,6 @@ tabs.forEach((tab, index) => {
 });
 showPerspective("operar");
 
-const dialog = document.querySelector("#client-dialog");
-let dialogTrigger;
-document.querySelectorAll("[data-client]").forEach((button) => {
-  button.addEventListener("click", () => {
-    if (clientUrl) {
-      try {
-        const target = new URL(clientUrl);
-        if (
-          target.protocol === "https:" &&
-          !target.username &&
-          !target.password
-        ) {
-          location.assign(target.href);
-          return;
-        }
-      } catch {
-        /* Un destino inválido conserva el estado informativo local. */
-      }
-    }
-    dialogTrigger = button;
-    dialog.showModal();
-    document.body.classList.add("modal-open");
-  });
-});
-dialog
-  .querySelectorAll(".dialog-close, .dialog-done")
-  .forEach((button) => button.addEventListener("click", () => dialog.close()));
-dialog.addEventListener("close", () => {
-  document.body.classList.remove("modal-open");
-  dialogTrigger?.focus();
-});
-
 const form = document.querySelector("#demo-form");
 const status = document.querySelector("#form-status");
 const whatsappReady = document.querySelector("#whatsapp-ready");
